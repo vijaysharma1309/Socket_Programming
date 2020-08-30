@@ -16,12 +16,14 @@ Figure 1 and figure 2 shows the message flow between TCP server and TCP client i
 
 ![Figure 1: TCP Server and TCP Client Communication on Loopback IP address in Blocking Mode](Images/tcp_blocking.png)
 
-Figure 1: TCP Server and TCP Client Communication on Loopback IP address in Blocking Mode
+*Figure 1: TCP Server and TCP Client Communication on Loopback IP address in Blocking Mode*
+
 
 
 ![Figure 2: TCP Server and TCP Client Communication on Loopback IP address in Non-Blocking Mode](Images/tcp_non_blocking.png)
 
-Figure 2: TCP Server and TCP Client Communication on Loopback IP address in Non-Blocking Mode
+*Figure 2: TCP Server and TCP Client Communication on Loopback IP address in Non-Blocking Mode*
+
 
 
 Also, we can show communication between TCP Server and TCP Client running on same machine but having different IP addresses with the help of VLAN.
@@ -29,12 +31,14 @@ Also, we can show communication between TCP Server and TCP Client running on sam
 
 ![Figure 3: TCP Server and TCP Client Communication with two different IP addresses in Blocking Mode](Images/tcp_blocking_vlan.png)
 
-Figure 3: TCP Server and TCP Client Communication with two different IP addresses in Blocking Mode
+*Figure 3: TCP Server and TCP Client Communication with two different IP addresses in Blocking Mode*
+
 
 
 ![Figure 4: TCP Server and TCP Client Communication with two different IP addresses in Non-Blocking Mode](Images/tcp_non_blocking_vlan.png)
 
-Figure 4: TCP Server and TCP Client Communication with two different IP addresses in Non-Blocking Mode
+
+*Figure 4: TCP Server and TCP Client Communication with two different IP addresses in Non-Blocking Mode*
 
 
 
@@ -47,12 +51,14 @@ Figure 5 and figure 6 shows the message flow between UDP server and UDP client i
 
 ![Figure 5: UDP Server and UDP Client Communication on Loopback IP address in blocking mode](Images/udp_blocking.png)
 
-Figure 5: UDP Server and UDP Client Communication on Loopback IP address in blocking mode
+
+*Figure 5: UDP Server and UDP Client Communication on Loopback IP address in blocking mode*
 
 
 ![Figure 6: UDP Server and UDP Client Communication on Loopback IP address in non-blocking mode](Images/udp_non_blocking.png)
 
-Figure 6: UDP Server and UDP Client Communication on Loopback IP address in non-blocking mode
+
+*Figure 6: UDP Server and UDP Client Communication on Loopback IP address in non-blocking mode*
 
 
 Also, we can show communication between UDP Server and UDP Client running on same machine but having different IP addresses with the help of VLAN.
@@ -60,9 +66,11 @@ Also, we can show communication between UDP Server and UDP Client running on sam
 
 **[Image to be uploaded soon]**
 
-Figure 7: UDP Server and UDP Client Communication with two different IP addresses in blocking-mode
+
+*Figure 7: UDP Server and UDP Client Communication with two different IP addresses in blocking-mode*
 
 
 **[Image to be uploaded soon]**
 
-Figure 8: UDP Server and UDP Client Communication with two different IP addresses in blocking-mode
+
+*Figure 8: UDP Server and UDP Client Communication with two different IP addresses in blocking-mode*
