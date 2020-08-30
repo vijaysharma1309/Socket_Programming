@@ -47,5 +47,5 @@ make udp
 make clean
 ```
 
-Please refer [Socket_Programming/socket_details.txt](Socket_Programming/socket_details.txt)
-for general information about socket programming and wireshark captures.
+Please refer [Socket_Programming/wireshark_captures.txt](Socket_Programming/wireshark_captures.txt)
+for wireshark captures.
