@@ -1,4 +1,8 @@
+/*
+* Blocking TCP Client example for learning purpose.
+*/
 
+/* the usual suspects */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

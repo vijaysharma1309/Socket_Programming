@@ -1,3 +1,6 @@
+/*
+* Non-Blocking TCP Server example for learning purpose.
+*/
 
 /* the usual suspects */
 #include <stdlib.h>
@@ -61,6 +64,8 @@ static void remove_from_monitored_fd_set(int socket_fd)
     }
 }
 
+/* Copy all the FDs from monitored_fd_set array to 
+ * fd_set Data structure */
 static void refresh_fd_set(fd_set *fd_set_ptr)
 {
     FD_ZERO(fd_set_ptr);
@@ -74,6 +79,7 @@ static void refresh_fd_set(fd_set *fd_set_ptr)
     }
 }
 
+/* Get the maximum fd from the array */
 static int get_max_fd()
 {
     int i;
@@ -119,7 +125,7 @@ int main()
         return -1;
     }
 
-    /* non-blocking socket */
+    /* non-blocking socket. 'fcntl' manipulates the file descriptor. */
     flags = fcntl(sockfd, F_GETFL, 0);
     if(fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) < 0)
     {
@@ -154,7 +160,8 @@ int main()
         return -1;
     }
 
-    /* Continue to accept clients until shutdown is issued */
+    /* This is the main loop for handling connections.
+	 * Continue to accept clients until exit is issued. */
     while (1) 
     {
         refresh_fd_set(&readfds);

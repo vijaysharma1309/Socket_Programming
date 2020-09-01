@@ -1,3 +1,8 @@
+/*
+* Blocking UDP Server example for learning purpose.
+*/
+
+/* the usual suspects */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -27,6 +32,7 @@ int main (void)
         return 0;
     }
 
+	/* Initialize the server address struct with zeros */
     memset((char *)&server_addr, 0, sizeof(server_addr));
     
     server_addr.sin_family      = AF_INET;
@@ -39,7 +45,7 @@ int main (void)
         close(sockfd);
         return 0;
     }
-
+    /* This is the main loop for handling connections. */
     while(1)
     {        
         if((recvLen = recvfrom(sockfd, buf, BUF_LEN - 1, 0, (struct sockaddr *)&client_addr, &client_addrLen)) < 0)

@@ -1,4 +1,8 @@
+/*
+* Non-Blocking TCP Client example for learning purpose.
+*/
 
+/* the usual suspects */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -36,6 +40,7 @@ int main(int argc, char** argv)
         return 0;
     }
 
+	/* non-blocking socket. 'fcntl' manipulates the file descriptor. */
     flags = fcntl(sockfd, F_GETFL, 0);
     if (fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) < 0) 
     {
@@ -62,6 +67,7 @@ int main(int argc, char** argv)
     /* Connect to the server */
     while (connect(sockfd, (struct sockaddr*) &server_addr, sizeof(server_addr)) < 0) 
     {
+		/* Todo */
     }
 
     while(1)

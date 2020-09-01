@@ -1,3 +1,8 @@
+/*
+* Blocking UDP Client example for learning purpose.
+*/
+
+/* the usual suspects */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -26,12 +31,14 @@ int main(int argc, char** argv)
         return 0;
     }
 
+	/* Create a socket for UDP communication */
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) 
     {
        printf("cannot create a socket.");
        return 0;
     }
 
+	/* Initialize the client address struct with zeros */
     memset(&server_addr, 0, sizeof(server_addr));
 
     server_addr.sin_family = AF_INET;

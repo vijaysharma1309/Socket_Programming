@@ -1,3 +1,6 @@
+/*
+* Blocking TCP Server example for learning purpose.
+*/
 
 /* the usual suspects */
 #include <stdlib.h>
@@ -14,14 +17,14 @@
 #define MAX_CLIENT_SUPPORTED    10
 #define BUFFER_SIZE             256
 
-/*An array of File descriptors */
+/* An array of File descriptors */
 int monitored_fd_set[MAX_CLIENT_SUPPORTED];
 
-/*Each connected client's intermediate result is 
- * maintained in this client array.*/
+/* Each connected client's intermediate result is 
+ * maintained in this client array. */
 int client_result[MAX_CLIENT_SUPPORTED] = {0};
 
-/*Remove all the FDs, if any, from the the array*/
+/* Remove all the FDs, if any, from the the array */
 static void intitiaze_monitor_fd_set()
 {
     int i;
@@ -31,7 +34,7 @@ static void intitiaze_monitor_fd_set()
     }
 }
 
-/*Add a new FD to the monitored_fd_set array*/
+/* Add a new FD to the monitored_fd_set array */
 static void add_to_monitored_fd_set(int socket_fd)
 {
     int i;
@@ -44,7 +47,7 @@ static void add_to_monitored_fd_set(int socket_fd)
     }
 }
 
-/*Remove the FD from monitored_fd_set array*/
+/* Remove the FD from monitored_fd_set array */
 static void remove_from_monitored_fd_set(int socket_fd)
 {
     int i;
@@ -58,6 +61,8 @@ static void remove_from_monitored_fd_set(int socket_fd)
     }
 }
 
+/* Copy all the FDs from monitored_fd_set array to 
+ * fd_set Data structure */
 static void refresh_fd_set(fd_set *fd_set_ptr)
 {
     FD_ZERO(fd_set_ptr);
@@ -71,7 +76,7 @@ static void refresh_fd_set(fd_set *fd_set_ptr)
     }
 }
 
-/* Get the maximum fd from the array*/
+/* Get the maximum fd from the array */
 static int get_max_fd()
 {
     int i;
@@ -111,7 +116,7 @@ int main()
         return -1;
     }
 
-    /*Add master socket to Monitored set of FDs*/
+    /* Add master socket to Monitored set of FDs */
     add_to_monitored_fd_set(sockfd);
 
     /* Initialize the server address struct with zeros */
@@ -122,7 +127,7 @@ int main()
     server_addr.sin_port        = htons(DEFAULT_PORT); 
     server_addr.sin_addr.s_addr = INADDR_ANY;          
 
-    /* Bind the server socket to our port */
+    /* Bind the server socket to our port i.e. assigning a name to a socket */
     if (bind(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) 
     {
         fprintf(stderr, "ERROR: failed to bind\n");
@@ -136,18 +141,29 @@ int main()
         return -1;
     }
 
+	/* This is the main loop for handling connections.
+	 * Continue to accept clients until exit is issued. */
     while (1) 
     {
-        refresh_fd_set(&readfds);
+        /* Copy the all monitored FDs to readfds */
+		refresh_fd_set(&readfds);
         printf("Waiting on select()\n");
-
+		
+		/* Blocking system call, allows a program to monitor multiple file descriptors,
+         * waiting until one or more of the file descriptors become "ready" for
+         * some class of I/O operation */
         select(get_max_fd() + 1, &readfds, NULL, NULL, NULL);
 
         if(FD_ISSET(sockfd, &readfds))
         {
             /* New connection will come through this socket */
             printf("Received new connection\n");
-
+			
+			/* It used with connection-based socket types
+			* (SOCK_STREAM, SOCK_SEQPACKET).  It extracts the first connection
+			* request on the queue of pending connections for the listening socket,
+			* sockfd, creates a new connected socket, and returns a new file
+			* descriptor referring to that socket. */
             conn_fd = accept(sockfd, (struct sockaddr*)&client_addr, &size);
 
             if (conn_fd == -1) 
@@ -178,6 +194,8 @@ int main()
 
                     memset(buffer, 0, BUFFER_SIZE);
 
+					/* It is a blocking system call. Server is blocked here and waiting
+					 * for the data to arrive from the client */
                     if ((ret = read(conn_socket_fd, buffer, sizeof(buffer))) == -1) 
                     {
                         fprintf(stderr, "ERROR: failed to read\n");
